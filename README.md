@@ -1,5 +1,4 @@
-Sondage sur la maintenabilité des projets GitHub
-JavaScript
+Sondage sur la maintenabilité des projets GitHub JavaScript
 =======
 Panel : développeurs JavaScript
 Environ 50 projets
