@@ -1,0 +1,3 @@
+- Algorithme de récupération semi-aléatoire d'un projet de manière à équilibrer le nombre de notes par projet, en fonction de ce qu'a déjà fait l'utilisateur
+- Formulaire pour noter un projet
+- Design simple et efficace 
