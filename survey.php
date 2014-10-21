@@ -49,25 +49,43 @@
 			<div class="page-header">
 				<h1>
 					<a href="https://www.github.com/<?= $project['link_github'] ?>" target="_blank" >
-						<?= $project['link_github'] ?>
+						<?= str_replace("/", " / ", $project['link_github']) ?>
 					</a>
 				</h1>
 			</div>
 			<p class="lead">How maintainable is this project?</p>
 			<p>
-				Worst
-				<?php
-					for($i = 1; $i <= 5; $i++)
-						echo '<button type="button" class="btn btn-default">'.$i.'</button>
-					';
-				?>
-				Best
+				<form type="post" action="survey.php" >
+					Worst
+					<div class="btn-group" data-toggle="buttons">
+						<?php
+							for($i = 1; $i <= 5; $i++)
+								echo '
+								<label class="btn btn-primary">
+									<input type="radio" name="options" id="option1" checked> '.$i.'
+								</label>
+								';
+						?>
+					</div>
+					Best
+					<br /><br />
+					Explain why (optionnal)<br />
+					<textarea rows="5" cols="70" ></textarea>
+					<br />
+					<input type="submit" value="Submit" />
+				</form>
 			</p>
+			
 		</div>
 		<div class="footer">
 			<div class="container">
-				<p class="text-muted">GitRank project.</p>
+				<p class="text-muted">This survey complements the GitRank project
+					realized by University of Technology of Compiègne's students.</p>
 			</div>
 		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="bootstrap-3.2.0/js/bootstrap.min.js"></script>
+		<script>$('.btn').button();</script>
 	</body>
 </html>
