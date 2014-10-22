@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Lun 20 Octobre 2014 à 23:57
+-- Généré le: Mer 22 Octobre 2014 à 13:04
 -- Version du serveur: 5.5.40-0ubuntu0.14.04.1
 -- Version de PHP: 5.5.9-1ubuntu4.4
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données: `GitRank-sondage`
+-- Base de données: `GitRank-survey`
 --
 
 -- --------------------------------------------------------
@@ -32,6 +32,8 @@ CREATE TABLE IF NOT EXISTS `answer` (
   `project_id` int(11) NOT NULL,
   `grade` int(11) NOT NULL,
   `visitor_id` int(11) NOT NULL,
+  `explanation` text NOT NULL,
+  `time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 

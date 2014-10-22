@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	include_once("MySQL.class.php");
 
 	// Connect to the database
@@ -14,11 +15,25 @@
 	}
 
 	// If a survey has been sent
-	if(!empty($_POST))
+	if(!empty($_POST) AND !empty($_SESSION['project_id']))
 	{
-		echo '<pre>';
-		var_dump($_POST);
-		echo '</pre>';
+		$grade = @$_POST['grade'];
+		$explanation = @$_POST['explanation'];
+
+		if(!is_nan($grade) AND $grade >= 1 AND $grade <= 5)
+		{
+			$insert_answer = $db->prepare("INSERT INTO answer
+											(project_id, grade, visitor_id, explanation, time)
+											VALUES(?,?,?,?,?)");
+			$insert_answer->bindValue(1, $_SESSION['project_id'], PDO::PARAM_INT);
+			$insert_answer->bindValue(2, $grade, PDO::PARAM_INT);
+			$insert_answer->bindValue(3, $visitor_id, PDO::PARAM_INT);
+			$insert_answer->bindValue(4, $explanation, PDO::PARAM_STR);
+			$insert_answer->bindValue(5, time(), PDO::PARAM_INT);
+			$insert_answer->execute();
+
+			$success = "Thanks for answering the survey! Give your opinion about another one!";
+		}
 	}
 
 	// Get a project that the visitor hasn't yet answered and which have the fewest nb_answers as possible
@@ -27,6 +42,7 @@
 		WHERE NOT EXISTS (SELECT * FROM answer WHERE project.id = answer.project_id AND answer.visitor_id = $visitor_id)
 		ORDER BY nb_answers, RAND()
 		LIMIT 1")->fetchAll()[0];
+	$_SESSION['project_id'] = $project['id'];
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +86,7 @@
 							for($i = 1; $i <= 5; $i++)
 								echo '
 								<label class="btn btn-primary">
-									<input type="radio" name="grades" id="grade_1"> '.$i.'
+									<input type="radio" name="grade" value="'.$i.'"> '.$i.'
 								</label>
 								';
 						?>
@@ -83,6 +99,12 @@
 					<input type="submit" value="Submit" />
 				</form>
 			</p>
+			<?php
+				if(!empty($success))
+				{
+					echo '<p style="color:green;" >'.$success.'</p>';
+				}
+			?>
 			
 		</div>
 		<div class="footer">
