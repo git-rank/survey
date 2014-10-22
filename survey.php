@@ -96,7 +96,7 @@
 				<p class="lead">Is the project maintained?</p>
 				<p>
 					<form method="post" action="survey.php" >
-						A little
+						No
 						<div class="btn-group" data-toggle="buttons">
 							<?php
 								for($i = 1; $i <= 5; $i++)
@@ -107,7 +107,7 @@
 									';
 							?>
 						</div>
-						A lot
+						Yes
 						<br /><br />
 						Explain why (optional)<br />
 						<textarea name="explanation" rows="5" cols="70" ></textarea>
