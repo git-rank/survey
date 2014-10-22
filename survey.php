@@ -13,6 +13,14 @@
 		setcookie('visitor_id', $visitor_id, time()+60*60*24*365);
 	}
 
+	// If a survey has been sent
+	if(!empty($_POST))
+	{
+		echo '<pre>';
+		var_dump($_POST);
+		echo '</pre>';
+	}
+
 	// Get a project that the visitor hasn't yet answered and which have the fewest nb_answers as possible
 	$project = $db->query(
 		"SELECT * FROM project
@@ -55,14 +63,14 @@
 			</div>
 			<p class="lead">How maintainable is this project?</p>
 			<p>
-				<form type="post" action="survey.php" >
+				<form method="post" action="survey.php" >
 					Worst
 					<div class="btn-group" data-toggle="buttons">
 						<?php
 							for($i = 1; $i <= 5; $i++)
 								echo '
 								<label class="btn btn-primary">
-									<input type="radio" name="options" id="option1" checked> '.$i.'
+									<input type="radio" name="grades" id="grade_1"> '.$i.'
 								</label>
 								';
 						?>
@@ -70,7 +78,7 @@
 					Best
 					<br /><br />
 					Explain why (optionnal)<br />
-					<textarea rows="5" cols="70" ></textarea>
+					<textarea name="explanation" rows="5" cols="70" ></textarea>
 					<br />
 					<input type="submit" value="Submit" />
 				</form>
