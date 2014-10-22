@@ -93,10 +93,10 @@
 						</a>
 					</h1>
 				</div>
-				<p class="lead">How maintainable is this project?</p>
+				<p class="lead">Is the project maintained?</p>
 				<p>
 					<form method="post" action="survey.php" >
-						Worst
+						A little
 						<div class="btn-group" data-toggle="buttons">
 							<?php
 								for($i = 1; $i <= 5; $i++)
@@ -107,9 +107,9 @@
 									';
 							?>
 						</div>
-						Best
+						A lot
 						<br /><br />
-						Explain why (optionnal)<br />
+						Explain why (optional)<br />
 						<textarea name="explanation" rows="5" cols="70" ></textarea>
 						<input type="hidden" name="token" value="<?= $_SESSION['token'] ?>" />
 						<br />
@@ -133,7 +133,7 @@
 							echo '<p>'.$projects[$answer['project_id']]['link_github'].
 							' '.$answer['grade'].
 							' '.substr($answer['explanation'],0,30).
-							'...'.'</p>';
+							'...</p>';
 					}
 				?>
 			</div>
