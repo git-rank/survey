@@ -32,7 +32,7 @@
 			$insert_answer->bindValue(5, time(), PDO::PARAM_INT);
 			$insert_answer->execute();
 
-			$success = "Thanks for answering the survey! Give your opinion about another one!";
+			$success = true;
 		}
 	}
 
@@ -41,8 +41,18 @@
 		"SELECT * FROM project
 		WHERE NOT EXISTS (SELECT * FROM answer WHERE project.id = answer.project_id AND answer.visitor_id = $visitor_id)
 		ORDER BY nb_answers, RAND()
-		LIMIT 1")->fetchAll()[0];
-	$_SESSION['project_id'] = $project['id'];
+		LIMIT 1")->fetchAll();
+	
+	// If the visitor has done every projects
+	if(empty($project))
+	{
+		$no_project = true;
+	}
+	else
+	{
+		$project = $project[0];
+		$_SESSION['project_id'] = $project['id'];
+	}
 ?>
 
 <!DOCTYPE html>
@@ -69,53 +79,69 @@
 	</head>
 
 	<body>
-		<div class="container">
-			<div class="page-header">
-				<h1>
-					<a href="https://www.github.com/<?= $project['link_github'] ?>" target="_blank" >
-						<?= str_replace("/", " / ", $project['link_github']) ?>
-					</a>
-				</h1>
-			</div>
-			<p class="lead">How maintainable is this project?</p>
-			<p>
-				<form method="post" action="survey.php" >
-					Worst
-					<div class="btn-group" data-toggle="buttons">
-						<?php
-							for($i = 1; $i <= 5; $i++)
-								echo '
-								<label class="btn btn-primary">
-									<input type="radio" name="grade" value="'.$i.'"> '.$i.'
-								</label>
-								';
-						?>
-					</div>
-					Best
-					<br /><br />
-					Explain why (optionnal)<br />
-					<textarea name="explanation" rows="5" cols="70" ></textarea>
-					<br />
-					<input type="submit" value="Submit" />
-				</form>
-			</p>
-			<?php
-				if(!empty($success))
-				{
-					echo '<p style="color:green;" >'.$success.'</p>';
-				}
-			?>
-			
-		</div>
-		<div class="footer">
+		<?php if(empty($no_project)) { ?>
 			<div class="container">
-				<p class="text-muted">This survey complements the GitRank project
-					realized by University of Technology of Compiègne's students.</p>
+				<div class="page-header">
+					<h1>
+						<a href="https://www.github.com/<?= $project['link_github'] ?>" target="_blank" >
+							<?= str_replace("/", " / ", $project['link_github']) ?>
+						</a>
+					</h1>
+				</div>
+				<p class="lead">How maintainable is this project?</p>
+				<p>
+					<form method="post" action="survey.php" >
+						Worst
+						<div class="btn-group" data-toggle="buttons">
+							<?php
+								for($i = 1; $i <= 5; $i++)
+									echo '
+									<label class="btn btn-primary">
+										<input type="radio" name="grade" value="'.$i.'"> '.$i.'
+									</label>
+									';
+							?>
+						</div>
+						Best
+						<br /><br />
+						Explain why (optionnal)<br />
+						<textarea name="explanation" rows="5" cols="70" ></textarea>
+						<br />
+						<input type="submit" value="Submit" />
+					</form>
+				</p>
+				<?php
+					if(!empty($success))
+					{
+						echo '<p style="color:green;" >Thanks for answering the survey! Give your opinion about another project!</p>';
+					}
+				?>
+				
 			</div>
-		</div>
+			<div class="footer">
+				<div class="container">
+					<p class="text-muted">This survey complements the GitRank project
+						realized by University of Technology of Compiègne's students.</p>
+				</div>
+			</div>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="bootstrap-3.2.0/js/bootstrap.min.js"></script>
-		<script>$('.btn').button();</script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+			<script src="bootstrap-3.2.0/js/bootstrap.min.js"></script>
+			<script>$('.btn').button();</script>
+		<?php } else { ?>
+			<div class="container">
+				<div class="page-header">
+					<h1>GitRank</h1>
+				</div>
+				<p class="lead"><br />You have given your opinion about all projects! Thank you very much!<br /></p>
+				<p>If you would contact us about the project, send an email to <em>schadoc_alex@hotmail.fr</em></p>
+			</div>
+			<div class="footer">
+				<div class="container">
+					<p class="text-muted">This survey complements the GitRank project
+						realized by University of Technology of Compiègne's students.</p>
+				</div>
+			</div>
+		<?php } ?>
 	</body>
 </html>
