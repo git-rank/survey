@@ -17,23 +17,27 @@
 	// If a survey has been sent
 	if(!empty($_POST) AND !empty($_SESSION['project_id']))
 	{
-		$grade = @$_POST['grade'];
-		$explanation = @$_POST['explanation'];
-
-		if(!is_nan($grade) AND $grade >= 1 AND $grade <= 5)
+		if(@$_POST['token'] == $_SESSION['token'])
 		{
-			$insert_answer = $db->prepare("INSERT INTO answer
-											(project_id, grade, visitor_id, explanation, time)
-											VALUES(?,?,?,?,?)");
-			$insert_answer->bindValue(1, $_SESSION['project_id'], PDO::PARAM_INT);
-			$insert_answer->bindValue(2, $grade, PDO::PARAM_INT);
-			$insert_answer->bindValue(3, $visitor_id, PDO::PARAM_INT);
-			$insert_answer->bindValue(4, $explanation, PDO::PARAM_STR);
-			$insert_answer->bindValue(5, time(), PDO::PARAM_INT);
-			$insert_answer->execute();
+			$grade = @$_POST['grade'];
+			$explanation = @$_POST['explanation'];
 
-			$success = true;
+			if(!is_nan($grade) AND $grade >= 1 AND $grade <= 5)
+			{
+				$insert_answer = $db->prepare("INSERT INTO answer
+												(project_id, grade, visitor_id, explanation, time)
+												VALUES(?,?,?,?,?)");
+				$insert_answer->bindValue(1, $_SESSION['project_id'], PDO::PARAM_INT);
+				$insert_answer->bindValue(2, $grade, PDO::PARAM_INT);
+				$insert_answer->bindValue(3, $visitor_id, PDO::PARAM_INT);
+				$insert_answer->bindValue(4, $explanation, PDO::PARAM_STR);
+				$insert_answer->bindValue(5, time(), PDO::PARAM_INT);
+				$insert_answer->execute();
+			}
 		}
+		// If the token is invalid, it considers that the visitor has sent a answer clicking twice
+		// so it displays a success sentence for the first answer
+		$success = true;
 	}
 
 	// Get a project that the visitor hasn't yet answered and which have the fewest nb_answers as possible
@@ -52,6 +56,7 @@
 	{
 		$project = $project[0];
 		$_SESSION['project_id'] = $project['id'];
+		$_SESSION['token'] = rand();
 	}
 ?>
 
@@ -106,6 +111,7 @@
 						<br /><br />
 						Explain why (optionnal)<br />
 						<textarea name="explanation" rows="5" cols="70" ></textarea>
+						<input type="hidden" name="token" value="<?= $_SESSION['token'] ?>" />
 						<br />
 						<input type="submit" value="Submit" />
 					</form>
