@@ -122,7 +122,20 @@
 						echo '<p style="color:green;" >Thanks for answering the survey! Give your opinion about another project!</p>';
 					}
 				?>
-				
+				<?php
+					$answers = $db->query("SELECT * FROM answer")->fetchAll();
+					$projects2 = $db->query("SELECT * FROM project")->fetchAll();
+					foreach ($projects2 as $i => $project) {
+						$projects[$project['id']] = $projects2[$i];
+					}
+					foreach ($answers as $answer) {
+						if($visitor_id == $answer['visitor_id'])
+							echo '<p>'.$projects[$answer['project_id']]['link_github'].
+							' '.$answer['grade'].
+							' '.substr($answer['explanation'],0,30).
+							'...'.'</p>';
+					}
+				?>
 			</div>
 			<div class="footer">
 				<div class="container">
