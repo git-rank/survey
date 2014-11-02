@@ -141,12 +141,6 @@
 					//*/
 				?>
 			</div>
-			<div class="footer">
-				<div class="container">
-					<p class="text-muted">This survey complements the GitRank project
-						realized by University of Technology of Compiègne's students.</p>
-				</div>
-			</div>
 
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 			<script src="bootstrap-3.2.0/js/bootstrap.min.js"></script>
@@ -159,12 +153,14 @@
 				<p class="lead"><br />You have given your opinion about all projects! Thank you very much!<br /></p>
 				<p>If you would contact us about the project, send an email to <em>schadoc_alex@hotmail.fr</em></p>
 			</div>
+		<?php } ?>
+
 			<div class="footer">
 				<div class="container">
 					<p class="text-muted">This survey complements the GitRank project
-						realized by University of Technology of Compiègne's students.</p>
+						realized by University of Technology of Compiègne's students.<br/>
+						<a href="about_us.php" >About us</a></p>
 				</div>
 			</div>
-		<?php } ?>
 	</body>
 </html>
