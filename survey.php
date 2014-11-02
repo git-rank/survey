@@ -22,7 +22,7 @@
 			$grade = @$_POST['grade'];
 			$explanation = @$_POST['explanation'];
 
-			if(!is_nan($grade) AND $grade >= 1 AND $grade <= 5)
+			if(!is_nan($grade) AND $grade >= 0 AND $grade <= 5)
 			{
 				$insert_answer = $db->prepare("INSERT INTO answer
 												(project_id, grade, visitor_id, explanation, time)
@@ -96,8 +96,11 @@
 				<p class="lead">Is the project maintained?</p>
 				<p>
 					<form method="post" action="survey.php" >
-						No
+						No = 1 ; Yes = 5<br />
 						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-primary">
+								<input type="radio" name="grade" value="0"> Don't know
+							</label>
 							<?php
 								for($i = 1; $i <= 5; $i++)
 									echo '
@@ -107,7 +110,6 @@
 									';
 							?>
 						</div>
-						Yes
 						<br /><br />
 						Explain why (optional)<br />
 						<textarea name="explanation" rows="5" cols="70" ></textarea>
