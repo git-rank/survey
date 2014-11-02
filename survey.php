@@ -125,6 +125,7 @@
 					}
 				?>
 				<?php
+					/*// DEBUG
 					$answers = $db->query("SELECT * FROM answer")->fetchAll();
 					$projects2 = $db->query("SELECT * FROM project")->fetchAll();
 					foreach ($projects2 as $i => $project) {
@@ -137,6 +138,7 @@
 							' '.substr($answer['explanation'],0,30).
 							'...</p>';
 					}
+					//*/
 				?>
 			</div>
 			<div class="footer">
