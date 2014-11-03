@@ -67,7 +67,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>GitRank Survey</title>
+		<title>GitRank project - Survey</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet">
@@ -154,12 +154,11 @@
 				<p>If you would contact us about the project, send an email to <em>schadoc_alex@hotmail.fr</em></p>
 			</div>
 		<?php } ?>
-
 			<div class="footer">
 				<div class="container">
 					<p class="text-muted">This survey complements the GitRank project
 						realized by University of Technology of Compiègne's students.<br/>
-						<a href="about_us.php" >About us</a></p>
+						<a href="survey.php" >Survey</a> - <a href="about_us.php" >About us</a></p>
 				</div>
 			</div>
 	</body>
