@@ -58,108 +58,80 @@
 		$_SESSION['project_id'] = $project['id'];
 		$_SESSION['token'] = rand();
 	}
+
+	include('header.php');
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		<title>GitRank project - Survey</title>
-
-		<!-- Bootstrap core CSS -->
-		<link href="bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet">
-		<link href="bootstrap-3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
-
-		<link href="sticky-footer.css" rel="stylesheet">
-
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
-	</head>
-
-	<body>
-		<?php if(empty($no_project)) { ?>
-			<div class="container">
-				<div class="page-header">
-					<h1>
-						<a href="https://www.github.com/<?= $project['link_github'] ?>" target="_blank" >
-							<?= str_replace("/", " / ", $project['link_github']) ?>
-						</a>
-					</h1>
-				</div>
-				<p class="lead">Is the project maintained?</p>
-				<p>
-					<form method="post" action="survey.php" >
-						No = 1 ; Yes = 5<br />
-						<div class="btn-group" data-toggle="buttons">
+<?php if(empty($no_project)) { ?>
+	<div class="container">
+		<div class="page-header">
+			<h1>
+				<a href="https://www.github.com/<?= $project['link_github'] ?>" target="_blank" >
+					<?= str_replace("/", " / ", $project['link_github']) ?>
+				</a>
+			</h1>
+		</div>
+		<p class="lead">Is the project maintained?</p>
+		<p>
+			<form method="post" action="survey.php" >
+				No = 1 ; Yes = 5<br />
+				<div class="btn-group" data-toggle="buttons">
+					<label class="btn btn-primary">
+						<input type="radio" name="grade" value="0"> Don't know
+					</label>
+					<?php
+						for($i = 1; $i <= 5; $i++)
+							echo '
 							<label class="btn btn-primary">
-								<input type="radio" name="grade" value="0"> Don't know
+								<input type="radio" name="grade" value="'.$i.'"> '.$i.'
 							</label>
-							<?php
-								for($i = 1; $i <= 5; $i++)
-									echo '
-									<label class="btn btn-primary">
-										<input type="radio" name="grade" value="'.$i.'"> '.$i.'
-									</label>
-									';
-							?>
-						</div>
-						<br /><br />
-						Explain why (optional)<br />
-						<textarea name="explanation" rows="5" cols="70" ></textarea>
-						<input type="hidden" name="token" value="<?= $_SESSION['token'] ?>" />
-						<br />
-						<input type="submit" value="Submit" />
-					</form>
-				</p>
-				<?php
-					if(!empty($success))
-					{
-						echo '<p style="color:green;" >Thanks for answering the survey! Give your opinion about another project!</p>';
-					}
-				?>
-				<?php
-					/*// DEBUG
-					$answers = $db->query("SELECT * FROM answer")->fetchAll();
-					$projects2 = $db->query("SELECT * FROM project")->fetchAll();
-					foreach ($projects2 as $i => $project) {
-						$projects[$project['id']] = $projects2[$i];
-					}
-					foreach ($answers as $answer) {
-						if($visitor_id == $answer['visitor_id'])
-							echo '<p>'.$projects[$answer['project_id']]['link_github'].
-							' '.$answer['grade'].
-							' '.substr($answer['explanation'],0,30).
-							'...</p>';
-					}
-					//*/
-				?>
-			</div>
+							';
+					?>
+				</div>
+				<br /><br />
+				Explain why (optional)<br />
+				<textarea name="explanation" rows="5" cols="70" ></textarea>
+				<input type="hidden" name="token" value="<?= $_SESSION['token'] ?>" />
+				<br />
+				<input type="submit" value="Submit" />
+			</form>
+		</p>
+		<?php
+			if(!empty($success))
+			{
+				echo '<p style="color:green;" >Thanks for answering the survey! Give your opinion about another project!</p>';
+			}
+		?>
+		<?php
+			/*// DEBUG
+			$answers = $db->query("SELECT * FROM answer")->fetchAll();
+			$projects2 = $db->query("SELECT * FROM project")->fetchAll();
+			foreach ($projects2 as $i => $project) {
+				$projects[$project['id']] = $projects2[$i];
+			}
+			foreach ($answers as $answer) {
+				if($visitor_id == $answer['visitor_id'])
+					echo '<p>'.$projects[$answer['project_id']]['link_github'].
+					' '.$answer['grade'].
+					' '.substr($answer['explanation'],0,30).
+					'...</p>';
+			}
+			//*/
+		?>
+	</div>
 
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-			<script src="bootstrap-3.2.0/js/bootstrap.min.js"></script>
-			<script>$('.btn').button();</script>
-		<?php } else { ?>
-			<div class="container">
-				<div class="page-header">
-					<h1>GitRank</h1>
-				</div>
-				<p class="lead"><br />You have given your opinion about all projects! Thank you very much!<br /></p>
-				<p>If you would contact us about the project, send an email to <em>schadoc_alex@hotmail.fr</em></p>
-			</div>
-		<?php } ?>
-			<div class="footer">
-				<div class="container">
-					<p class="text-muted">This survey complements the GitRank project
-						realized by University of Technology of Compiègne's students.<br/>
-						<a href="survey.php" >Survey</a> - <a href="about_us.php" >About us</a></p>
-				</div>
-			</div>
-	</body>
-</html>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="bootstrap-3.2.0/js/bootstrap.min.js"></script>
+	<script>$('.btn').button();</script>
+<?php } else { ?>
+	<div class="container">
+		<div class="page-header">
+			<h1>GitRank</h1>
+		</div>
+		<p class="lead"><br />You have given your opinion about all projects! Thank you very much!<br /></p>
+		<p>If you would contact us about the project, send an email to <em>schadoc_alex@hotmail.fr</em></p>
+	</div>
+<?php
+			}
+	include('footer.php');
+?>
