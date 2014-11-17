@@ -6,13 +6,18 @@
 			<h1>About us</h1>
 		</div>
 		<p class="lead">
-			Gitrank is a Search Toolbar that allows you to rank JS projects following <span style="color:orange;">maintainability standards</span>.
+			GitRank is a research project that aims at providing maintainability indicators of open source projects hosted on Github.
 			<br /><br />
-			The developers will be able to know the maintainability rate of their projects and <span style="color:orange;">predict when their code could break</span> without being judged on the content of their work. It will allow all programmers to explore different topics according to criterions that they will choose but, to do this, we have to determine this criterions and calibrate them. Could you please be serious when you fill this survey so that we can make a good calibration ?
+			Developers will eventually discover a maintainability score of open source projects, based on various criteria that we will select during the course of this research project. Determining if a third-party project is maintained enough to be used into another projects is a key issue is software development. However assessing whether projects are "maintained enough" to be reliable is a difficult question.
 			<br /><br />
-			This project is open source and developed by five engineering and design students from the University of Technology of Compiegne.
+			Our approach is to explore statistical criteria that provide insightful and objective information on the maintainability state of open source projects, without analyzing their source code. Activities observed on repositories such as commits, issues, and pull requests may indeed provide relevant data to analyze.
 			<br /><br />
-			Please contact us at <span style="color:red;">xxxx@yyy.zz</span> if you need more information!
+			We first launch a survey to help us score "at first sight" the maintainability of 50 Javascript projects. Would you rely on them for your own projects?
+			<br /><br />
+			We are five engineering and design students from the Université de Technologie de Compiègne. Help us build new quality tools for the open source community!"
+			<br /><br />
+			Please contact us at <em>contact@git-rank.net</em> if you need more information!
+			<br /><br />
 		</p>
 	</div>
 <?php
