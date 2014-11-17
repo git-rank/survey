@@ -1,0 +1,8 @@
+RewriteEngine on
+
+DirectoryIndex /GitRank/survey/survey.php [L]
+
+RewriteRule ^$ /GitRank/survey/survey.php [L]
+RewriteRule ^[Ss]urvey$ /GitRank/survey/survey.php [L]
+RewriteRule ^[Aa]bout-[Uu]s$ /GitRank/survey/about_us.php [L]
+RewriteRule ^[Rr]esults$ /GitRank/survey/results.php [L]
