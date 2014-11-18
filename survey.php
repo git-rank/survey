@@ -121,7 +121,7 @@
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="bootstrap-3.2.0/js/bootstrap.min.js"></script>
+	<script src="survey/bootstrap-3.2.0/js/bootstrap.min.js"></script>
 	<script>$('.btn').button();</script>
 <?php } else { ?>
 	<div class="container">
@@ -133,5 +133,6 @@
 	</div>
 <?php
 			}
+	echo '<br />';
 	include('footer.php');
 ?>
