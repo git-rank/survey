@@ -3,7 +3,7 @@
 ?>
 	<div class="container">
 		<div class="page-header">
-			<h1>About us</h1>
+			<h1>GitRank - About us</h1>
 		</div>
 		<p class="lead">
 			GitRank is a research project that aims at providing maintainability indicators of open source projects hosted on Github.
