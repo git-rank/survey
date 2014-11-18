@@ -1,8 +1,13 @@
 RewriteEngine on
 
-DirectoryIndex /GitRank/survey/survey.php [L]
+ErrorDocument 401 /Survey
+ErrorDocument 403 /Survey
+ErrorDocument 404 /Survey
+ErrorDocument 500 /Survey
 
-RewriteRule ^$ /GitRank/survey/survey.php [L]
-RewriteRule ^[Ss]urvey$ /GitRank/survey/survey.php [L]
-RewriteRule ^[Aa]bout-[Uu]s$ /GitRank/survey/about_us.php [L]
-RewriteRule ^[Rr]esults$ /GitRank/survey/results.php [L]
+DirectoryIndex /Survey [R=302]
+
+RewriteRule ^$ /Survey [R=302]
+RewriteRule ^[Ss]urvey$ /survey/survey.php [L]
+RewriteRule ^[Aa]bout-[Uu]s$ /survey/about_us.php [L]
+RewriteRule ^[Rr]esults$ /survey/results.php [L]
