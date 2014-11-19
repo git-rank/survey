@@ -71,7 +71,7 @@
 				</a>
 			</h1>
 		</div>
-		<p class="lead">Is the project maintained?</p>
+		<p class="lead">Is the project <strong>maintained</strong>?</p>
 		<p>
 			<form method="post" action="survey.php" >
 				No = 1 ; Yes = 5<br />
